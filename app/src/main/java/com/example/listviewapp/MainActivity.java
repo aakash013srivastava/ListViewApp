@@ -2,6 +2,7 @@ package com.example.listviewapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button addButton,viewList;
     TextView displayListItem;
     ArrayList<String> items = new ArrayList<>();
+    String output = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,19 +31,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String itemDesc = listItem.getText().toString();
+
                 if(itemDesc.length()>0){
+                    output += itemDesc+"\n";
                     items.add(itemDesc);
-                    String output = "";
-                    Iterator it = items.iterator();
-                    while(it.hasNext()){
-                        output += it.next()+"\n";
-                    }
                     displayListItem.setText(output);
                 }
             }
         });
 
-
+        viewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,listViewDisplayActivity.class);
+                intent.putExtra("ArrayList",items);
+                startActivity(intent);
+            }
+        });
     }
 
 }
