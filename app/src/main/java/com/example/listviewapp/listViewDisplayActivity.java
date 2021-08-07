@@ -20,9 +20,13 @@ ListView listView;
         Intent intent = getIntent();
         // Get ArrayList collection passed with intent
         ArrayList<String> arr = (ArrayList<String>)intent.getSerializableExtra("ArrayList");
-        // Create Data Source for ListView
-        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_list_item_1,arr);
-        listView.setAdapter(ad);
+        // Create Built-in Adapter for ListView
+        //ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_list_item_1,arr);
+        //listView.setAdapter(ad);
+
+        // Create custom adapter
+        customAdapter ca = new customAdapter(this,R.layout.my_layout,arr.toArray(new String[0]));
+        listView.setAdapter(ca);
 
     }
 }
